@@ -1,5 +1,5 @@
 # k8s-r8
-`rotate` is a tool for rotating out AWS ASG managed nodes within a k8s cluster. It was developed to make upgrading AWS AMIs as a one command experience that doesn't require intimate knowledge of AWS commands or Kubernetes internals.
+`rotate` is a tool for rotating out AWS Auto-Scaling Groups within a k8s cluster. It was developed to make upgrading AMIs as a one command experience that doesn't require intimate knowledge of AWS commands or Kubernetes internals.
 
 ## Assumptions
 This tool makes the following assumptions about the setup of your k8s cluster.
