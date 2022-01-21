@@ -2,14 +2,13 @@
 `rotate` is a tool for rotating out AWS Auto-Scaling Groups within a k8s cluster. It was developed to make upgrading AMIs as a one command experience that doesn't require intimate knowledge of AWS commands or Kubernetes internals.
 
 ## Assumptions
-This tool makes the following assumptions about the setup of your k8s cluster.
-1. All nodes in the cluster have a role label
-2. Each role label used within the cluster has a 1:1 mapping with an AWS ASG that manages all of the nodes in that role
-3. None of the pods running in your cluster maintain persistent volumes (note: this assumption being violated will not cause the tool to fail, but will mean that pods will likely have new volumes on rotation).
-4. The name of each node in your cluster is the internal dns name of the node in AWS.
+1. All nodes in the cluster have a role
+2. Each role used within the cluster has a 1:1 mapping with an AWS ASG that manages all of the nodes in that role
+3. None of the pods running in your cluster maintain persistent volumes
+4. The name of each node in your cluster is the internal DNS name of the node in AWS
 
 ## Requirements
-1. An AWS Profile where the default entry has permissions to modify ASGs (for simplicity, permissions to run arbitrary ASG commands is recommend, though this can be locked down as necessary)
+1. An AWS Profile where the default entry has permissions to modify ASGs
 2. A Kubernetes config that points to the cluster you wish to rotate. The config's user must have privileges to cordon nodes, delete pods, evict pods, and list the nodes in the cluster.
 
 
@@ -30,7 +29,7 @@ by default the rotate command will find all of the roles in your k8s cluster, an
 rotate --rotate-all
 ```
 This will find all of the roles in your k8s cluster, and incrementally rotate all of the nodes in those ASGs.
-ASG need to be the auto scaling group name, eg `safety-staging-ingress-nodes-20181015165147895500000002`. You can find this in AWS console -> ec2 -> auto scaling group
+ASG need to be the auto scaling group name, eg `staging-20211015165147895500000001`. You can find this in AWS console -> ec2 -> auto scaling group
 role name needs to be the kubernetes role, eg `ingress` or `compute`. You can find this with `kubectl describe node`.
 
 ```
