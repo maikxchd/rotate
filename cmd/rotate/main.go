@@ -158,7 +158,7 @@ func main() {
 	if err = g.Wait(); err != nil {
 		log.Printf("Failed to Scale up ASGs, %v\n", err)
 	}
-	return
+
 }
 
 type generateScaleOptInput struct {
