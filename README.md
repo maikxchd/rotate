@@ -1,5 +1,10 @@
 # k8s-r8
-`rotate` is a tool for rotating out AWS Auto-Scaling Groups within a k8s cluster. It was developed to make upgrading AMIs as a one command experience that doesn't require intimate knowledge of AWS commands or Kubernetes internals.
+`rotate` is a tool for rotating out AWS Auto-Scaling Groups within a k8s cluster. It was developed to make upgrading AMIs as a one command experience that doesn't require intimate knowledge of AWS commands or Kubernetes internals. 
+
+There are two use cases where you might want to rotate ASGs
+- To deploy a new release of your application with a rolling update by performing an instance rotation after you update the launch configuration of your ASG so your new instances will have the new launch configuration
+- To keep the instances fresh by running this tool periodically to terminate old instances and ensure that your auto scaling group is always running young instances
+
 
 ## Assumptions
 1. All nodes in the cluster have a role
@@ -34,7 +39,7 @@ role name needs to be the kubernetes role, eg `ingress` or `compute`. You can fi
 
 ```
 rotate --asg-to-role=ASG:ROLENAME --rotate-all
-AWS_PROFILE=twitch-safety-staging AWS_REGION=ap-southeast-3 go run cmd/rotate/main.go --rotate-all --asg-to-role='safety-staging-ingress-nodes-20211015165147895500000001:ingress'
+AWS_PROFILE=maikxchd AWS_REGION=ap-southeast-3 go run cmd/rotate/main.go --rotate-all --asg-to-role='safety-staging-ingress-nodes-20211015165147895500000001:ingress'
 ```
 This will find the ASG with the given name, make sure it corresponds to the specified role, and if so, rotate all nodes in that ASG incrementally. Removing the `--rotate-all` will lead to the tool rotating a single node.
 
