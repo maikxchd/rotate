@@ -35,7 +35,7 @@ github.com/aws/aws-sdk-go/service/ec2/ec2iface
 github.com/aws/aws-sdk-go/service/sts
 # github.com/davecgh/go-spew v1.1.1
 github.com/davecgh/go-spew/spew
-# github.com/gogo/protobuf v1.2.1
+# github.com/gogo/protobuf v1.3.2
 github.com/gogo/protobuf/proto
 github.com/gogo/protobuf/sortkeys
 # github.com/golang/protobuf v1.3.1
